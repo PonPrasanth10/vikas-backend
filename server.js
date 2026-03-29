@@ -18,7 +18,8 @@ app.use(helmet());
 app.use(cors({
   origin: [
     'http://localhost:5173',
-    'https://vikas-frontend-eta.vercel.app'
+    'https://vikas-frontend-eta.vercel.app',
+    'www.vikastrendz.com'
   ],
   credentials: true
 }));
