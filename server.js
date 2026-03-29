@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const cartRoutes = require('./routes/cartRoutes');
+const subscriberRoutes = require('./routes/subscriberRoutes');
 const errorHandler = require('./middleware/errorMiddleware');
 
 const app = express();
@@ -15,7 +16,10 @@ connectDB();
 // Middleware
 app.use(helmet());
 app.use(cors({
-  origin: 'https://vikas-frontend-eta.vercel.app',
+  origin: [
+    'http://localhost:5173',
+    'https://vikas-frontend-eta.vercel.app'
+  ],
   credentials: true
 }));
 app.use(express.json());
@@ -24,6 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api', cartRoutes);
+app.use('/api', subscriberRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {
