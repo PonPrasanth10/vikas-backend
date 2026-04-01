@@ -29,6 +29,4 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-userSchema.index({ mobileNumber: 1 }, { unique: true });
-
 module.exports = mongoose.model('User', userSchema);

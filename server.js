@@ -5,7 +5,6 @@ const helmet = require('helmet');
 const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const cartRoutes = require('./routes/cartRoutes');
-const subscribeRoutes = require('./routes/subscribeRoutes');
 const subscriberRoutes = require('./routes/subscriberRoutes');
 const errorHandler = require('./middleware/errorMiddleware');
 
