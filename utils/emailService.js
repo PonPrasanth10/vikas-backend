@@ -2,17 +2,16 @@ const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
-  requireTLS: true,
-  family: 4, // ✅ FORCE IPv4
+  port: 465,
+  secure: true,           // true for port 465
+  family: 4,              // force IPv4 — fixes Render/production ENETUNREACH errors
   auth: {
     user: process.env.EMAIL_USER.trim(),
-    pass: process.env.EMAIL_PASS.replace(/\s/g, ''),
+    pass: process.env.EMAIL_PASS.replace(/\s/g, ''), // strips spaces from App Password
   },
-  tls: {
-    rejectUnauthorized: false
-  }
+  connectionTimeout: 10000,  // 10s to establish connection
+  greetingTimeout: 10000,    // 10s to receive greeting
+  socketTimeout: 15000,      // 15s socket inactivity timeout
 });
 
 // Verify transporter on startup
