@@ -1,17 +1,21 @@
 const nodemailer = require('nodemailer');
+const dns = require('dns');
+
+// Force Node.js to resolve DNS using IPv4 first — fixes Render/cloud IPv6 issues
+dns.setDefaultResultOrder('ipv4first');
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 465,
-  secure: true,           // true for port 465
-  family: 4,              // force IPv4 — fixes Render/production ENETUNREACH errors
+  secure: true,
+  family: 4,
   auth: {
     user: process.env.EMAIL_USER.trim(),
-    pass: process.env.EMAIL_PASS.replace(/\s/g, ''), // strips spaces from App Password
+    pass: process.env.EMAIL_PASS.replace(/\s/g, ''),
   },
-  connectionTimeout: 10000,  // 10s to establish connection
-  greetingTimeout: 10000,    // 10s to receive greeting
-  socketTimeout: 15000,      // 15s socket inactivity timeout
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 15000,
 });
 
 // Verify transporter on startup
