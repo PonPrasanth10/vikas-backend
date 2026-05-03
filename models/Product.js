@@ -16,6 +16,22 @@ const productSchema = new mongoose.Schema(
     image: {
       type: String,
     },
+    category: {
+      type: String,
+      required: [true, 'Category is required'],
+      lowercase: true,
+      enum: ['womens', 'mens', 'sarees']
+    },
+    subcategory: {
+      type: String,
+      required: [true, 'Subcategory is required'],
+      lowercase: true,
+    },
+    tags: {
+      type: [String],
+      default: [],
+      // e.g. ['just-arrived', 'bridal', 'featured']
+    },
     stock: {
       type: Number,
       default: 0,

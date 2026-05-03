@@ -6,6 +6,8 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const subscriberRoutes = require('./routes/subscriberRoutes');
+const productRoutes = require('./routes/productRoutes');
+const userRoutes = require('./routes/userRoutes');
 const errorHandler = require('./middleware/errorMiddleware');
 
 const app = express();
@@ -34,6 +36,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/auth', authRoutes);
 app.use('/api', cartRoutes);
 app.use('/api', subscriberRoutes);
+app.use('/api', productRoutes);
+app.use('/api', userRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {
